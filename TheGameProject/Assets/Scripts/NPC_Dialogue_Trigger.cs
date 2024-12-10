@@ -9,6 +9,6 @@ public class NPC_Dialogue_Trigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<Dialogue_Manager>().Start_Dialogue(dialogue);
+        FindObjectOfType<Dialogue_Manager>().Start_Dialogue(dialogue);//Repeatable dialogue
     }
 }
