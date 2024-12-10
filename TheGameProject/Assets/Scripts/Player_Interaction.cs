@@ -28,7 +28,6 @@ public class Player_Interaction : MonoBehaviour
                 my_NPC.GetComponent<NPC_Dialogue_Trigger>().TriggerDialogue();
                 currentNPC = my_NPC.name;
                 interacting = true;
-                Debug.Log(currentNPC);
             }
         }
         else
