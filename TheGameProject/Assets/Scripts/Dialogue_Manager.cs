@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Specialized;
 
 public class Dialogue_Manager : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class Dialogue_Manager : MonoBehaviour
     {
         animator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
-        Debug.Log("Starting Conversation with " + dialogue.name);
         sentences.Clear();
         foreach (string dialogues in dialogue.sentences)
         {
@@ -37,8 +37,18 @@ public class Dialogue_Manager : MonoBehaviour
             return;
         }
         string sentence = sentences.Dequeue();
-        dialogueText.text = sentence;
-        Debug.Log(dialogueText);
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
+    }
+
+    IEnumerator TypeSentence (string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray()) // ToCharArray() converts a string to a character array
+        {
+            dialogueText.text += letter;
+            yield return null;
+        }
     }
     void EndDialogue()
     {

@@ -14,17 +14,18 @@ public class Player_Interaction : MonoBehaviour
     void Update()
     {
         Collider2D[] interactableNPC = Physics2D.OverlapCircleAll(transform.position, interactRange, NPC);
-        if (interacting && Input.GetKeyDown(KeyCode.E))
+        if (interacting && Input.GetKeyDown(KeyCode.Space))
         {
             foreach (Collider2D my_NPC in interactableNPC)
             {
                 FindObjectOfType<Dialogue_Manager>().DisplayNextSentence();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             foreach (Collider2D my_NPC in interactableNPC)
             {
+
                 my_NPC.GetComponent<NPC_Dialogue_Trigger>().TriggerDialogue();
                 currentNPC = my_NPC.name;
                 interacting = true;
