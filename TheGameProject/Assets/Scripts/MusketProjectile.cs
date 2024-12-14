@@ -13,7 +13,7 @@ public class MusketProjectile : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(transform.up * speed *Time.deltaTime);
+        transform.Translate(transform.right * speed *Time.deltaTime);
     }
     private void DestroyProjectile()
     {
