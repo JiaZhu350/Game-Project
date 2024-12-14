@@ -11,11 +11,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f; //speed of the player
     [SerializeField] private Rigidbody2D rb; //the rigidbody of the player
     [SerializeField] private Animator animator;
-    private float mousePos;
-
-    [SerializeField] private float hand;
-    [SerializeField] private float angleMax;
-    [SerializeField] private float angleMin;
 
     Vector2 movement; //going to be moving the player
 
@@ -23,9 +18,7 @@ public class Player_Movement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-        flipSprite(mousePos);
-
+        flipSprite();
     }
 
     private void FixedUpdate()
@@ -42,20 +35,11 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
-    private void flipSprite(float x) //Flipping the Player
+    private void flipSprite() //Flipping the player
     {
-        if (x == 0)
-        {
-            x = 0;
-        }
-        else if (x > 0)
-        {
-            x = x + rb.position.x;
-        }
-        else
-        {
-            x = x - rb.position.x;
-        }
-        transform.localScale = new Vector3(Mathf.Sign(x), 1, 1);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float direction = mouseWorldPos.x - rb.position.x;
+
+        transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
     }
 }
