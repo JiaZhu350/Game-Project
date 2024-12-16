@@ -6,8 +6,11 @@ public class Player_Combat : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private float offset;
-    [SerializeField] private float time2Shoot;
-    private float startTime;
+    private bool reloaded = true;
+    private bool reloading = false;
+    private float shotTime;
+    private float reloadTime = 100.0f; //Reload cooldown not working
+    
     public Transform shotPoint;
 
 
@@ -23,17 +26,28 @@ public class Player_Combat : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
         
         //Shooting
-        if (time2Shoot <= 0)
+        if (reloaded)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 Instantiate(projectile, shotPoint.position, transform.rotation);
-                time2Shoot = startTime;
+                reloaded = false;
+                Debug.Log(reloaded);
             }
         }
         else
         {
-            time2Shoot -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                shotTime = Time.time;
+                reloading = true;
+            }
+            else if (Time.time - shotTime < reloadTime && reloading)
+            {
+                Debug.Log("Ready to Fire");
+                reloaded = true;
+                reloading = false;
+            }
         }
     }
 }
