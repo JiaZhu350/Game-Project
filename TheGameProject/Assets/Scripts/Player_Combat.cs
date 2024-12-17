@@ -7,10 +7,8 @@ public class Player_Combat : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private float offset;
     private bool reloaded = true;
-    private bool reloading = false;
-    private float shotTime;
-    private float reloadTime = 100.0f; //Reload cooldown not working
-    
+    private float reloadTime; //Reload cooldown not working
+    private bool startCooldown = false;
     public Transform shotPoint;
 
 
@@ -32,22 +30,26 @@ public class Player_Combat : MonoBehaviour
             {
                 Instantiate(projectile, shotPoint.position, transform.rotation);
                 reloaded = false;
-                Debug.Log(reloaded);
+                reloadTime = 5f;
             }
         }
+        //Reloading
         else
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                shotTime = Time.time;
-                reloading = true;
+                startCooldown = true;
             }
-            else if (Time.time - shotTime < reloadTime && reloading)
+            if (startCooldown)
             {
-                Debug.Log("Ready to Fire");
-                reloaded = true;
-                reloading = false;
+                reloadTime -= Time.deltaTime;
             }
+        }
+        if (reloadTime <= 0f && !reloaded)
+        {
+            Debug.Log($"the gun is reloaded {Time.deltaTime}");
+            reloaded = true;
+            startCooldown = false;
         }
     }
 }
