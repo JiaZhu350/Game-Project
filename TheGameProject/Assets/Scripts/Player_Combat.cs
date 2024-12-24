@@ -8,9 +8,10 @@ public class Player_Combat : MonoBehaviour
     [SerializeField] private float offset;
     private bool reloaded = true;
     private float reloadTime; //Reload cooldown not working
-    private bool startCooldown = false;
+    public bool reloading = false;
     public Transform shotPoint;
-
+    [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem smokeFX;
 
 
 
@@ -29,27 +30,41 @@ public class Player_Combat : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Instantiate(projectile, shotPoint.position, transform.rotation);
+                animator.SetTrigger("shootGun");
+                smokeFX.Play();
                 reloaded = false;
-                reloadTime = 5f;
+                reloadTime = 3f;
             }
         }
         //Reloading
         else
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && !reloading)
             {
-                startCooldown = true;
+                StartCoroutine(ReloadGun());
             }
+            /*
             if (startCooldown)
             {
                 reloadTime -= Time.deltaTime;
-            }
+            }*/
         }
+        /*
         if (reloadTime <= 0f && !reloaded)
         {
             Debug.Log($"the gun is reloaded {Time.deltaTime}");
             reloaded = true;
             startCooldown = false;
-        }
+        }*/
+    }
+
+    private IEnumerator ReloadGun()
+    {
+        reloading = true;
+        animator.SetTrigger("reloadGun");
+        yield return new WaitForSeconds(reloadTime);
+        Debug.Log($"the gun is reloaded {Time.deltaTime}");
+        reloaded = true;
+        reloading = false;
     }
 }
