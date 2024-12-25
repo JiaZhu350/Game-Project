@@ -1201,6 +1201,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898841061}
   m_CullTransparentMesh: 1
+--- !u!1 &975122355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 732899541293007633, guid: 1b97ecbaee885e242bb03ecffa321cb6, type: 3}
+  m_PrefabInstance: {fileID: 1110682326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &975122358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975122355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfdefa860aa59cc418c1659d72b0d6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameWeapons:
+  - {fileID: 21300000, guid: 7ffb4114573d15f46b4bb6a1ae80a1b8, type: 3}
+  - {fileID: 21300000, guid: 13883688117f1e24f96d5e50f252d881, type: 3}
+  selectedWeapon: Hand
 --- !u!1 &1008421757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1644,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 732899541293007633, guid: 1b97ecbaee885e242bb03ecffa321cb6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 975122358}
   m_SourcePrefab: {fileID: 100100000, guid: 1b97ecbaee885e242bb03ecffa321cb6, type: 3}
 --- !u!4 &1316087762 stripped
 Transform:
