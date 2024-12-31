@@ -14,16 +14,18 @@ public class Equipment : MonoBehaviour
     [SerializeField] private TMP_Text descrip;
     [SerializeField] private Image display;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
-        if(inventory.slot1){
+        if(inventory.slot1 != null){
             slot1.sprite = inventory.slot1.itemSprite;
         }
-        if(inventory.slot2){
+        if(inventory.slot2 != null){
             slot2.sprite = inventory.slot2.itemSprite;
         }
-        if(inventory.slot3){
+        if(inventory.slot3 != null){
             slot3.sprite = inventory.slot3.itemSprite;
         }
         display.sprite = inventory.slot1.itemSprite;
@@ -36,5 +38,6 @@ public class Equipment : MonoBehaviour
     void Update()
     {
         
+
     }
 }
